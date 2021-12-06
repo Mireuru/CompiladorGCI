@@ -206,6 +206,7 @@ public class GenCodigoInt {
             Linea_BE id = new Linea_BE();
 		if( cmp.be.preAnalisis.complex.equals ( "num" ) ){
 				 //E -> num E'
+                                 num = cmp.be.preAnalisis;
 				 emparejar ( "num" ) ;
 				 Ep (Ep);             
                                  //Accion semantica 5
@@ -220,6 +221,7 @@ public class GenCodigoInt {
 		}
 			 else if ( cmp.be.preAnalisis.complex.equals ( "num.num" ) ){
 				 //E -> num.num  E'
+                                 numnum = cmp.be.preAnalisis;
 				 emparejar ( "num.num" ) ;
 				 Ep (Ep);      
                                  //Accion semantica 6
@@ -235,6 +237,7 @@ public class GenCodigoInt {
 		}
 			 else if ( cmp.be.preAnalisis.complex.equals ( "id" ) ){
 				 //E -> id E'
+                                 id = cmp.be.preAnalisis;
 				 emparejar ( "id" ) ;
 				 Ep (Ep);
                                  //Accion semantica 7
@@ -259,6 +262,7 @@ public class GenCodigoInt {
             Linea_BE oparit = new Linea_BE();
 		if ( cmp.be.preAnalisis.complex.equals ( "oparit" ) ) {
 			// E' -> oparit E
+                        oparit = cmp.be.preAnalisis;
 			emparejar ( "oparit" );
 			E (E);
                         //Accion semantica 8
