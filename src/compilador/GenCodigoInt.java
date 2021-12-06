@@ -173,30 +173,69 @@ public class GenCodigoInt {
 	private void S(Atributos S)
 	{
             Atributos E = new Atributos();
+            Atributos K = new Atributos();
             Linea_BE id = new Linea_BE();
             int p = 0;
 		if (cmp.be.preAnalisis.complex.equals ( "id" ) ) {
-					//S -> id := E {1} S
-					id = cmp.be.preAnalisis;
-                                        emparejar ( "id" );
-                                        
-					emparejar ( ":=" );
-					E (E);
-                                        //Accion semantica 1
-                                        p = cmp.ts.buscar(id.lexema);
-                                        if(p != NIL){
-                                            emite(p+" := "+ E.Lugar);
-                                        }
-                                        else{
-                                            cmp.me.error(Compilador.ERR_CODINT, "[S] Error");
-                                        }
-                                        //Fin de accion semantica 1
-					S (S);
-				}
-			  else {
-					//S -> EMPTY
-				}
+                    //S -> id := E {1} S
+                    id = cmp.be.preAnalisis;
+                    emparejar ( "id" );
+
+                    emparejar ( ":=" );
+                    E (E);
+                    //Accion semantica 1
+                    p = cmp.ts.buscar(id.lexema);
+                    if(p != NIL){
+                        emite(p+" := "+ E.Lugar);
+                    }
+                    else{
+                        cmp.me.error(Compilador.ERR_CODINT, "[S] Error");
+                    }
+                    //Fin de accion semantica 1
+                    S (S);
+                }
+                else if(cmp.be.preAnalisis.complex.equals ( "si" )) {
+                    //S -> si K entonces inicio S fin S
+                    emparejar("si");
+                    K(K);
+                    emparejar("entonces");
+                    emparejar("inicio");
+                    S(S);
+                    emparejar("fin");
+                    S(S);
+                }
+                else if(cmp.be.preAnalisis.complex.equals ( "mientras" )){
+                    //S -> mientras K hacer inicio S fin S
+                    emparejar("mientras");
+                    K(K);
+                    emparejar("hacer");
+                    emparejar("inicio");
+                    S(S);
+                    emparejar("fin");
+                    S(S);
+                }
+                else {
+                              //S -> EMPTY
+                }
 	}
+        //---------------------------------------------------
+        private void K(Atributos K){
+        Atributos E1 = new Atributos();
+        Atributos E2 = new Atributos();
+        Linea_BE oprel = new Linea_BE();
+	if( cmp.be.preAnalisis.complex.equals ( "num" ) ||
+            cmp.be.preAnalisis.complex.equals ( "num.num" ) ||
+            cmp.be.preAnalisis.complex.equals ( "id" ) )
+        {
+            E(E1);
+            oprel = cmp.be.preAnalisis;
+            emparejar("oprel");
+            E(E2);
+        }
+        else{
+            error("Error de K");
+        }
+}
 	//------------------------------------------------------------------------
 	private void E(Atributos E)
 	{

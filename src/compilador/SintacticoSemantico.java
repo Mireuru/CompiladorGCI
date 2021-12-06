@@ -134,10 +134,46 @@ private void S()
                 emparejar ( "id" );
                 emparejar ( ":=" );
                 E();
+                S();
             }
-          else {
-                //S -> EMPTY
-            }
+        else if(cmp.be.preAnalisis.complex.equals ( "si" ) ){
+                //S -> si K entonces inicio S fin S
+                emparejar("si");
+                K();
+                emparejar("entonces");
+                emparejar("inicio");
+                S();
+                emparejar("fin");
+                S();
+                
+        }
+        else if(cmp.be.preAnalisis.complex.equals ( "mientras" ) ){
+            //S -> mientras K hacer inicio S fin S
+                emparejar("mientras");
+                K();
+                emparejar("hacer");
+                emparejar("inicio");
+                S();
+                emparejar("fin");
+                S();
+        }
+        else {
+              //S -> EMPTY
+        }
+}
+private void K()
+{
+	if( cmp.be.preAnalisis.complex.equals ( "num" ) ||
+            cmp.be.preAnalisis.complex.equals ( "num.num" ) ||
+            cmp.be.preAnalisis.complex.equals ( "id" ) )
+        {
+            E();
+            emparejar("oprel");
+            E();
+        }
+        else{
+            error("Error de K");
+        }
 }
 //------------------------------------------------------------------------
 private void E()
