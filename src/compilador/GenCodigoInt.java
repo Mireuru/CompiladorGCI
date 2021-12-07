@@ -180,6 +180,7 @@ public class GenCodigoInt {
 	{
             Atributos E = new Atributos();
             Atributos S1 = new Atributos();
+            Atributos S2 = new Atributos();
             Atributos K = new Atributos();
             Linea_BE id = new Linea_BE();
             String p = "";
@@ -200,15 +201,15 @@ public class GenCodigoInt {
                         cmp.me.error(Compilador.ERR_CODINT, "[S] Error");
                     }
                     //Fin de accion semantica 1
-                    S (S);
+                    S (S1);
                 }
                 else if(cmp.be.preAnalisis.complex.equals ( "si" )) {
                     //S -> si K entonces inicio S fin S
                     emparejar("si");
                     //Inicio accion semantica 2
                         K.Verdadera = etiqnueva();
-                        S1.Siguiente = etiqnueva();
-                        K.Falsa = S1.Siguiente;
+                        S.Siguiente = etiqnueva();
+                        K.Falsa = S.Siguiente;
                     K(K);
                         S.Codigo = K.Verdadera + ":";
                         emite(S.Codigo);
@@ -218,11 +219,11 @@ public class GenCodigoInt {
                     emparejar("inicio");
                     S(S1);
                     //Inicio accion semantica 3
-                        S.Codigo = S1.Siguiente+":";
+                        S.Codigo = S.Siguiente+":";
                         emite(S.Codigo);
                     //Fin de accion semantica 3
                     emparejar("fin");
-                    S(S);
+                    S(S2);
                 }
                 else if(cmp.be.preAnalisis.complex.equals ( "mientras" )){
                     //S -> mientras K hacer inicio S fin S
@@ -251,7 +252,7 @@ public class GenCodigoInt {
                     S.Codigo = S.Siguiente+":";
                     emite(S.Codigo);
                     //
-                    S(S);
+                    S(S2);
                 }
                 else {
                               //S -> EMPTY
