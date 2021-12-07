@@ -36,6 +36,7 @@ public class GenCodigoInt {
  
     private Compilador cmp;
     private int consecutivoTemp;
+    private int consecutivoEtiq;
     public static final int NIL = 0;
     
     //--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ public class GenCodigoInt {
     
     public void generar () {
         consecutivoTemp = 1;
+        consecutivoEtiq = 1;
         P ();
     }    
 
@@ -61,6 +63,10 @@ public class GenCodigoInt {
     
     private String tempnuevo(  ) {
         return "t" + consecutivoTemp++;
+    }
+    
+    private String etiqnueva(  ) {
+        return "etiq" + consecutivoEtiq++;
     }
     
     //--------------------------------------------------------------------------
@@ -186,7 +192,8 @@ public class GenCodigoInt {
                     //Accion semantica 1
                     p = cmp.ts.buscar(id.lexema);
                     if(p != NIL){
-                        emite(p+" := "+ E.Lugar);
+                        S.Codigo = p+" := "+ E.Lugar;
+                        emite(S.Codigo);
                     }
                     else{
                         cmp.me.error(Compilador.ERR_CODINT, "[S] Error");
@@ -197,10 +204,22 @@ public class GenCodigoInt {
                 else if(cmp.be.preAnalisis.complex.equals ( "si" )) {
                     //S -> si K entonces inicio S fin S
                     emparejar("si");
+                    //Inicio accion semantica 2
+                        K.Verdadera = etiqnueva();
+                        S.Siguiente = etiqnueva();
+                        K.Falsa = S.Siguiente;
                     K(K);
+                        S.Codigo = K.Verdadera + ":";
+                        emite(S.Codigo);
+                    //Fin de accion semantica 2
+                    
                     emparejar("entonces");
                     emparejar("inicio");
                     S(S);
+                    //
+                        S.Codigo = S.Siguiente;
+                        emite(S.Codigo);
+                    //
                     emparejar("fin");
                     S(S);
                 }
@@ -231,6 +250,10 @@ public class GenCodigoInt {
             oprel = cmp.be.preAnalisis;
             emparejar("oprel");
             E(E2);
+            //Inicio accion semantica K
+                K.Codigo = "si "+E1.Lugar+" "+oprel.lexema+" "+E2.Lugar+" goto "+K.Verdadera+"\ngoto "+K.Falsa;
+                emite(K.Codigo);
+            //Fin accion semantica K
         }
         else{
             error("Error de K");
