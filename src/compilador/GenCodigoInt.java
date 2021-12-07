@@ -217,21 +217,40 @@ public class GenCodigoInt {
                     emparejar("entonces");
                     emparejar("inicio");
                     S(S1);
-                    //
+                    //Inicio accion semantica 3
                         S.Codigo = S1.Siguiente+":";
                         emite(S.Codigo);
-                    //
+                    //Fin de accion semantica 3
                     emparejar("fin");
                     S(S);
                 }
                 else if(cmp.be.preAnalisis.complex.equals ( "mientras" )){
                     //S -> mientras K hacer inicio S fin S
                     emparejar("mientras");
+                    //Inicio accion semantica 4
+                        S.Comienzo = etiqnueva();
+                        K.Verdadera = etiqnueva();
+                        S.Siguiente = etiqnueva();
+                        K.Falsa = S.Siguiente;
+                        S1.Siguiente = S.Comienzo;
+                        S.Codigo = S.Comienzo+": ";
+                        emite(S.Codigo);
                     K(K);
+                        S.Codigo = K.Verdadera + ":";
+                        emite(S.Codigo);
+                    //
                     emparejar("hacer");
                     emparejar("inicio");
                     S(S1);
+                    //Inicio
+                    S.Codigo = "goto "+S.Comienzo;
+                        emite(S.Codigo);
+                    //Fin de accion semantica 4
                     emparejar("fin");
+                    //
+                    S.Codigo = S.Siguiente+":";
+                    emite(S.Codigo);
+                    //
                     S(S);
                 }
                 else {
