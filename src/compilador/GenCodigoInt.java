@@ -37,7 +37,7 @@ public class GenCodigoInt {
     private Compilador cmp;
     private int consecutivoTemp;
     private int consecutivoEtiq;
-    public static final int NIL = 0;
+    public static final String NIL = "";
     
     //--------------------------------------------------------------------------
     // Constructor de la clase, recibe la referencia de la clase principal del 
@@ -179,9 +179,10 @@ public class GenCodigoInt {
 	private void S(Atributos S)
 	{
             Atributos E = new Atributos();
+            Atributos S1 = new Atributos();
             Atributos K = new Atributos();
             Linea_BE id = new Linea_BE();
-            int p = 0;
+            String p = "";
 		if (cmp.be.preAnalisis.complex.equals ( "id" ) ) {
                     //S -> id := E {1} S
                     id = cmp.be.preAnalisis;
@@ -190,8 +191,8 @@ public class GenCodigoInt {
                     emparejar ( ":=" );
                     E (E);
                     //Accion semantica 1
-                    p = cmp.ts.buscar(id.lexema);
-                    if(p != NIL){
+                    p = id.getLexema();
+                    if(!p.equals(NIL)){
                         S.Codigo = p+" := "+ E.Lugar;
                         emite(S.Codigo);
                     }
@@ -206,8 +207,8 @@ public class GenCodigoInt {
                     emparejar("si");
                     //Inicio accion semantica 2
                         K.Verdadera = etiqnueva();
-                        S.Siguiente = etiqnueva();
-                        K.Falsa = S.Siguiente;
+                        S1.Siguiente = etiqnueva();
+                        K.Falsa = S1.Siguiente;
                     K(K);
                         S.Codigo = K.Verdadera + ":";
                         emite(S.Codigo);
@@ -215,9 +216,9 @@ public class GenCodigoInt {
                     
                     emparejar("entonces");
                     emparejar("inicio");
-                    S(S);
+                    S(S1);
                     //
-                        S.Codigo = S.Siguiente;
+                        S.Codigo = S1.Siguiente+":";
                         emite(S.Codigo);
                     //
                     emparejar("fin");
@@ -229,7 +230,7 @@ public class GenCodigoInt {
                     K(K);
                     emparejar("hacer");
                     emparejar("inicio");
-                    S(S);
+                    S(S1);
                     emparejar("fin");
                     S(S);
                 }
@@ -273,11 +274,11 @@ public class GenCodigoInt {
 				 Ep (Ep);             
                                  //Accion semantica 5
                                  if(Ep.op.equals("")){
-                                     E.Lugar = num.entrada+"";
+                                     E.Lugar = num.lexema+"";
                                  }
                                  else{
                                      E.Lugar = tempnuevo();
-                                     emite(E.Lugar + " := "+num.entrada+Ep.op+Ep.Lugar);
+                                     emite(E.Lugar + " := "+num.lexema+Ep.op+Ep.Lugar);
                                  }
                                  //Fin accion semantica 5
 		}
@@ -288,11 +289,11 @@ public class GenCodigoInt {
 				 Ep (Ep);      
                                  //Accion semantica 6
                                  if(Ep.op.equals("")){
-                                     E.Lugar = numnum.entrada+"";
+                                     E.Lugar = numnum.lexema+"";
                                  }
                                  else{
                                      E.Lugar = tempnuevo();
-                                     emite(E.Lugar + " := "+numnum.entrada+Ep.op+Ep.Lugar);
+                                     emite(E.Lugar + " := "+numnum.lexema+Ep.op+Ep.Lugar);
                                  }
                                  //Fin accion semantica 6
                                  
@@ -304,11 +305,11 @@ public class GenCodigoInt {
 				 Ep (Ep);
                                  //Accion semantica 7
                                  if(Ep.op.equals("")){
-                                     E.Lugar = id.entrada+"";
+                                     E.Lugar = id.lexema+"";
                                  }
                                  else{
                                      E.Lugar = tempnuevo();
-                                     emite(E.Lugar + " := "+id.entrada+Ep.op+Ep.Lugar);
+                                     emite(E.Lugar + " := "+id.lexema+Ep.op+Ep.Lugar);
                                  }
                                  //Fin accion semantica 6
 		}         
