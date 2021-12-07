@@ -210,25 +210,27 @@ public class GenCodigoInt {
                         K.Verdadera = etiqnueva();
                         S.Siguiente = etiqnueva();
                         K.Falsa = S.Siguiente;
+                    //Fin de accion semantica 2
                     K(K);
+                    //Inicio accion semantica 3
                         S.Codigo = K.Verdadera + ":";
                         emite(S.Codigo);
-                    //Fin de accion semantica 2
+                    //Fin de accion semantica 3
                     
                     emparejar("entonces");
                     emparejar("inicio");
                     S(S1);
-                    //Inicio accion semantica 3
+                    //Inicio accion semantica 4
                         S.Codigo = S.Siguiente+":";
                         emite(S.Codigo);
-                    //Fin de accion semantica 3
+                    //Fin de accion semantica 4
                     emparejar("fin");
                     S(S2);
                 }
                 else if(cmp.be.preAnalisis.complex.equals ( "mientras" )){
                     //S -> mientras K hacer inicio S fin S
                     emparejar("mientras");
-                    //Inicio accion semantica 4
+                    //Inicio accion semantica 5
                         S.Comienzo = etiqnueva();
                         K.Verdadera = etiqnueva();
                         S.Siguiente = etiqnueva();
@@ -236,22 +238,24 @@ public class GenCodigoInt {
                         S1.Siguiente = S.Comienzo;
                         S.Codigo = S.Comienzo+": ";
                         emite(S.Codigo);
+                    //Fin de accion semantica 5
                     K(K);
+                    //Inicio accion semantica 6
                         S.Codigo = K.Verdadera + ":";
                         emite(S.Codigo);
-                    //
+                    //Fin de accion semantica 6
                     emparejar("hacer");
                     emparejar("inicio");
                     S(S1);
-                    //Inicio
+                    //Inicio accion semantica 7
                     S.Codigo = "goto "+S.Comienzo;
                         emite(S.Codigo);
-                    //Fin de accion semantica 4
+                    //Fin de accion semantica 7
                     emparejar("fin");
-                    //
+                    //Inicio accion semantica 8
                     S.Codigo = S.Siguiente+":";
                     emite(S.Codigo);
-                    //
+                    //Fin de accion semantica 8
                     S(S2);
                 }
                 else {
@@ -271,10 +275,10 @@ public class GenCodigoInt {
             oprel = cmp.be.preAnalisis;
             emparejar("oprel");
             E(E2);
-            //Inicio accion semantica K
+            //Inicio accion semantica 9
                 K.Codigo = "si "+E1.Lugar+" "+oprel.lexema+" "+E2.Lugar+" goto "+K.Verdadera+"\ngoto "+K.Falsa;
                 emite(K.Codigo);
-            //Fin accion semantica K
+            //Fin accion semantica 9
         }
         else{
             error("Error de K");
@@ -292,7 +296,7 @@ public class GenCodigoInt {
                                  num = cmp.be.preAnalisis;
 				 emparejar ( "num" ) ;
 				 Ep (Ep);             
-                                 //Accion semantica 5
+                                 //Accion semantica 10
                                  if(Ep.op.equals("")){
                                      E.Lugar = num.lexema+"";
                                  }
@@ -300,14 +304,14 @@ public class GenCodigoInt {
                                      E.Lugar = tempnuevo();
                                      emite(E.Lugar + " := "+num.lexema+Ep.op+Ep.Lugar);
                                  }
-                                 //Fin accion semantica 5
+                                 //Fin accion semantica 10
 		}
 			 else if ( cmp.be.preAnalisis.complex.equals ( "num.num" ) ){
 				 //E -> num.num  E'
                                  numnum = cmp.be.preAnalisis;
 				 emparejar ( "num.num" ) ;
 				 Ep (Ep);      
-                                 //Accion semantica 6
+                                 //Accion semantica 11
                                  if(Ep.op.equals("")){
                                      E.Lugar = numnum.lexema+"";
                                  }
@@ -315,7 +319,7 @@ public class GenCodigoInt {
                                      E.Lugar = tempnuevo();
                                      emite(E.Lugar + " := "+numnum.lexema+Ep.op+Ep.Lugar);
                                  }
-                                 //Fin accion semantica 6
+                                 //Fin accion semantica 11
                                  
 		}
 			 else if ( cmp.be.preAnalisis.complex.equals ( "id" ) ){
@@ -323,7 +327,7 @@ public class GenCodigoInt {
                                  id = cmp.be.preAnalisis;
 				 emparejar ( "id" ) ;
 				 Ep (Ep);
-                                 //Accion semantica 7
+                                 //Accion semantica 12
                                  if(Ep.op.equals("")){
                                      E.Lugar = id.lexema+"";
                                  }
@@ -331,7 +335,7 @@ public class GenCodigoInt {
                                      E.Lugar = tempnuevo();
                                      emite(E.Lugar + " := "+id.lexema+Ep.op+Ep.Lugar);
                                  }
-                                 //Fin accion semantica 6
+                                 //Fin accion semantica 12
 		}         
 			 else{
 				cmp.me.error(Compilador.ERR_CODINT,"Error de E");
@@ -348,15 +352,15 @@ public class GenCodigoInt {
                         oparit = cmp.be.preAnalisis;
 			emparejar ( "oparit" );
 			E (E);
-                        //Accion semantica 8
+                        //Accion semantica 13
                         Ep.op = oparit.lexema;
                         Ep.Lugar = E.Lugar;
-                        //Fin de accion semantica 8
+                        //Fin de accion semantica 13
 		} else {
 			// E' -> empty
-                        //Accion semantica 9
+                        //Accion semantica 14
                         Ep.op = "";
-                        //Fin de accion semantica 9
+                        //Fin de accion semantica 14
 		}
 	}
 		 
