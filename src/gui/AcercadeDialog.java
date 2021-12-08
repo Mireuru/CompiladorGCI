@@ -57,11 +57,11 @@ public class AcercadeDialog extends javax.swing.JDialog {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Editor/Iconos/Logo1.jpg"))); // NOI18N
 
-        jtxaAcercaDe.setColumns(20);
         jtxaAcercaDe.setEditable(false);
+        jtxaAcercaDe.setColumns(20);
         jtxaAcercaDe.setLineWrap(true);
         jtxaAcercaDe.setRows(5);
-        jtxaAcercaDe.setText("          INSTITUTO TECNOLOGICO DE LA LAGUNA\n     INGENIERIA EN SISTEMAS COMPUTACIONALES\n               \"LENGUAJES Y AUTOMATAS II\"\n\n             Compilador de Lenguaje Pascal\n                                 Ver. 0.0.0\n\n                  EQUIPO DE DESARROLLO:\n\t\n\tFulano\n                     Sutano\n\tMengano\n");
+        jtxaAcercaDe.setText("          INSTITUTO TECNOLOGICO DE LA LAGUNA\n     INGENIERIA EN SISTEMAS COMPUTACIONALES\n               \"LENGUAJES Y AUTOMATAS II\"\n\n             Compilador de Lenguaje SIMPLE\n                                 Ver. 1.0.0\n\n                  EQUIPO DE DESARROLLO:\n\t\n\t18131242 \tJuan Miguel García Montes\n\t18131260 \tElí Uziel Montes Pérez\n\t18131270 \tErik Manuel Ramírez Vázquez\n\n");
         jScrollPane1.setViewportView(jtxaAcercaDe);
 
         jbtnCerrar.setText("Cerrar");
@@ -95,8 +95,8 @@ public class AcercadeDialog extends javax.swing.JDialog {
                 .addComponent(jbtnCerrar))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-934)/2, (screenSize.height-639)/2, 934, 639);
+        setSize(new java.awt.Dimension(934, 639));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     //--------------------------------------------------------------------------

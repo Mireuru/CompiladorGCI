@@ -71,11 +71,11 @@
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="jtxaAcercaDe">
           <Properties>
-            <Property name="columns" type="int" value="20"/>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="columns" type="int" value="20"/>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="          INSTITUTO TECNOLOGICO DE LA LAGUNA&#xa;     INGENIERIA EN SISTEMAS COMPUTACIONALES&#xa;               &quot;LENGUAJES Y AUTOMATAS II&quot;&#xa;&#xa;             Compilador de Lenguaje Pascal&#xa;                                 Ver. 0.0.0&#xa;&#xa;                  EQUIPO DE DESARROLLO:&#xa;&#x9;&#xa;&#x9;Fulano&#xa;                     Sutano&#xa;&#x9;Mengano&#xa;"/>
+            <Property name="text" type="java.lang.String" value="          INSTITUTO TECNOLOGICO DE LA LAGUNA&#xa;     INGENIERIA EN SISTEMAS COMPUTACIONALES&#xa;               &quot;LENGUAJES Y AUTOMATAS II&quot;&#xa;&#xa;             Compilador de Lenguaje SIMPLE&#xa;                                 Ver. 1.0.0&#xa;&#xa;                  EQUIPO DE DESARROLLO:&#xa;&#x9;&#xa;&#x9;18131242 &#x9;Juan Miguel Garc&#xed;a Montes&#xa;&#x9;18131260 &#x9;El&#xed; Uziel Montes P&#xe9;rez&#xa;&#x9;18131270 &#x9;Erik Manuel Ram&#xed;rez V&#xe1;zquez&#xa;&#xa;"/>
           </Properties>
         </Component>
       </SubComponents>
