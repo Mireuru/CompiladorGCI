@@ -276,7 +276,7 @@ public class GenCodigoInt {
             emparejar("oprel");
             E(E2);
             //Inicio accion semantica 9
-                K.Codigo = "si "+E1.Lugar+" "+oprel.lexema+" "+E2.Lugar+" goto "+K.Verdadera+"\ngoto "+K.Falsa;
+                K.Codigo = "if "+E1.Lugar+" "+oprel.lexema+" "+E2.Lugar+" goto "+K.Verdadera+"\ngoto "+K.Falsa;
                 emite(K.Codigo);
             //Fin accion semantica 9
         }
