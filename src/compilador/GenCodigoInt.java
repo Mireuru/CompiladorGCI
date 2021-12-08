@@ -3,31 +3,47 @@
  *:                     INGENIERIA EN SISTEMAS COMPUTACIONALES
  *:                         LENGUAJES Y AUTOMATAS II           
  *: 
- *:                  SEMESTRE: AGO-DIC/2013     HORA: 12-13 HRS
+ *:                  SEMESTRE: AGO - DIC 2021 HORA: 18-19 HRS
  *:                                   
  *:               
- *:    # Clase con la funcionalidad del Generador de COdigo Intermedio
+ *:    # Clase con la funcionalidad del Generador de Codigo Intermedio
  *                 
  *:                           
  *: Archivo       : GenCodigoInt.java
  *: Autor         : Fernando Gil  
  *: Fecha         : 03/Octubre/2013
  *: Compilador    : Java JDK 7
- *: Descripción   :  
- *:                  
- *:           	     
- *: Ult.Modif.    :
- *:  Fecha      Modificó            Modificacion
- *:=============================================================================
- *:                                 P -> V C
- *:                                 V -> id : T  V | empty
- *:                                 T -> caracter | entero | real 
- *:                                 C -> inicio S fin
- *:                                 S -> id := E  S  |  empty
- *:                                 E -> num  E' | num.num  E' |  id  E'
- *:                                 E'-> oparit E  |  empty 
+  *: Descripción   :  Generación de código de tres direcciones en base a la gramática
+ *:             	 	del lenguaje SIMPLE
+ *:     		 	 
+ *: Ult.Modif.	:
+*:
+*:  Fecha      	Modificó            			Modificacion
+*:=============================================================================
+ *:                                 	P -> V C
+ *:                                 	V -> id : T  V | empty
+ *:                                	T -> caracter | entero | real 
+ *:                                	C -> inicio S fin
+ *:                                	S -> id := E  S  |  empty
+ *:                                	E -> num  E' | num.num  E' |  id  E'
+ *:                                	E'-> oparit E  |  empty 
  *:-----------------------------------------------------------------------------
- */
+ *:
+ *:=============================================================================
+ *:
+ *:06/Dec/2021 	Miguel,Erik,Elí	Implementación de acciones semánticas para
+ *:                             generación de código de 3 direcciones
+ *:					P -> 	V C
+ *:					V -> 	id : T V | empty
+ *:					T -> 	entero | real | caracter
+ *:                             	C -> 	inicio S fin
+ *:					S -> 	id opasig E S | 
+ *:					si K entonces inicio S fin S | 
+ *:					mientras K hacer inicio S fin S |  
+ *:					empty
+ *:					K ->  E oprel E
+ *:					E -> 	id | num | num.num | literal
+ ----------------------------------------------------------------------------------------------------*/
 
 package compilador;
 
